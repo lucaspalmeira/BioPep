@@ -89,3 +89,6 @@ python3 search.py file.fasta email@email.com
 
 > ### Blast:
 > CAMACHO, Christiam; COULOURIS, George; AVAGYAN, Vahram; et al. BLAST+: architecture and applications. BMC Bioinformatics, v. 10, p. 421, 2009.
+
+> ### APD3: The antimicrobial peptide database
+> WANG, Guangshun; LI, Xia; WANG, Zhe. APD3: The antimicrobial peptide database as a tool for research and education. Nucleic Acids Research, v. 44, n. D1, p. D1087–D1093, 2016. Disponível em: </pmc/articles/PMC4702905/>. Acesso em: 26 nov. 2021.
