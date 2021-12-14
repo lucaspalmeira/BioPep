@@ -20,7 +20,7 @@ pip3 install biopython
 
 ### Create Data Base (PDB)
 ```
-cd biopep/pdb/
+cd pdb/
 ```
 ```
 tar -xvzf pdb_seqres.fasta.tar.gz
