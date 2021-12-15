@@ -80,6 +80,9 @@ python3 search.py file.fasta email@email.com
 ```
 
 ## Please, cite:
+> ### BioPep
+> Lucas Sousa Palmeira. (2021). BioPep. Zenodo. https://doi.org/10.5281/zenodo.5781778
+
 > ### Hpepdock:
 > ZHOU, Pei; JIN, Bowen; LI, Hao; et al. HPEPDOCK: A web server for blind peptide-protein acoplamento based on a hierarchical algorithm. Nucleic Acids Research, v. 46, n. W1, p. W443–W450, 2018.
 
