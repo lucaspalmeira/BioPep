@@ -76,8 +76,10 @@ sudo yum install ncbi-blast-2.12.0+-1.x86_64.rpm --nogpgcheck
 
 ## Run
 ```
-python3 search.py file.fasta email@email.com
+python3 search.py query.fasta email@email.com
 ```
+
+Note: After receiving the results by email, run notebook to retrieve your data.
 
 ## Please, cite:
 > ### BioPep
