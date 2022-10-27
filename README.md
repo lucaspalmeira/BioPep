@@ -49,7 +49,7 @@ Windows 10
 conda install -c anaconda pywget
 ```
 
-### Install Modeller 10.1
+### Install Modeller
 ```
 conda config --add channels salilab
 ```
@@ -57,6 +57,7 @@ conda config --add channels salilab
 conda install modeller
 ```
 You will be prompted after installation to edit a file to add your Modeller license key.
+Alternatively, set the `KEY_MODELLER` environment variable to your license key before you run **conda install**.
 
 ### Install Selenium
 ```
