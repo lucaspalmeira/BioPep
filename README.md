@@ -40,7 +40,9 @@ bash Anaconda3-2021.11-Linux-x86_64.sh
 ```
 
 Windows 10
->[Anaconda3-2022.10-Windows-x86_64.exe](https://repo.anaconda.com/archive/Anaconda3-2022.10-Windows-x86_64.exe)
+> [Anaconda3-2022.10-Windows-x86_64.exe](https://repo.anaconda.com/archive/Anaconda3-2022.10-Windows-x86_64.exe)
+> 
+> Visit the official website to see other versions: [Anaconda.com](https://www.anaconda.com/products/distribution#Downloads)
 
 ### Install Pywget (Only Windows)
 ```
@@ -78,9 +80,9 @@ sudo mv geckodriver /usr/local/bin/
 ```
 
 ChromeDriver (Chrome) on Windows
->[ChromeDriver - WebDriver for Chrome](https://chromedriver.chromium.org/downloads)
-
-Download the corresponding version driver your Chrome and move the .exe archive to installing folder Anaconda.
+> [ChromeDriver - WebDriver for Chrome](https://chromedriver.chromium.org/downloads)
+> 
+> Download the corresponding version driver your Chrome and move the .exe archive to installing folder Anaconda.
 
 ### Install Ncbi-Blast+ 
 
@@ -98,9 +100,9 @@ sudo yum install ncbi-blast-2.12.0+-1.x86_64.rpm --nogpgcheck
 ```
 
 Windows 10
->[Standalone BLAST Setup for Windows PC](https://www.ncbi.nlm.nih.gov/books/NBK52637/)
-
-Follow the tutorial above for the setup NCBI-Blast on your Windows Machine. 
+> [Standalone BLAST Setup for Windows PC](https://www.ncbi.nlm.nih.gov/books/NBK52637/)
+> 
+> Follow the tutorial above for the setup NCBI-Blast on your Windows Machine.
 
 ## Run
 ```
