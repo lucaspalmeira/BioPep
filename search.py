@@ -1,7 +1,6 @@
 #! /usr/bin/python3.8
 # coding: utf-8
 
-import os
 import sys
 from Bio import SeqIO
 from Alpha.Biopep import Peptide
@@ -29,7 +28,6 @@ def execute(y, email):
     print('The peptides were subjected to molecular docking, \
     after receiving all the emails with the results, \
     run the notebook to perform the data scraping.')
-
 
 
 if __name__ == '__main__':

@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import os
-import csv
 from Bio.Blast.Applications import NcbiblastpCommandline
 
 
@@ -20,4 +19,4 @@ class Peptide:
                                                db=f'{os.getcwd() + "/pdb/pdb_seqres"}',
                                                outfmt='"10 qseqid sseqid evalue bitscore pident"',
                                                out=f'pep{self.index}.csv')
-        stdout, stderr = command_blastp()
+        stdout, _ = command_blastp()
