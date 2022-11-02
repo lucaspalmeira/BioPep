@@ -3,6 +3,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+from output import output
 from datetime import datetime
 
 import time
@@ -18,7 +19,9 @@ class Dock:
         self.email = email
 
     def submit(self):
-        ligand = f'{os.getcwd()}/pep{self.index}' + '.B99990001.pdb'
+        path = f'{os.getcwd()}/output/{output.get()}'
+        pep_path = f'{path}/modelling/pep{self.index}'
+        ligand = f'{pep_path}/pep{self.index}' + '.B99990001.pdb'
         if os.path.isfile(ligand):
             self.driver.get('http://huanglab.phys.hust.edu.cn/hpepdock/')
             receptor = f'{os.getcwd()}/receptor_6lzg.pdb'
@@ -39,15 +42,21 @@ class Dock:
             time.sleep(5)
             link = self.driver.current_url
             # the link is required to see future results
-            with open('out_submit.csv', 'a') as out_csv:
+
+            exists_submit_file = os.path.exists(f'{path}/out_submit.csv')
+
+            with open(f'{path}/out_submit.csv', 'a') as out_csv:
                 csv_writer = csv.writer(out_csv, delimiter=',')
+                if not exists_submit_file:
+                    csv_writer.writerow(['Index', 'Sequence', 'Link'])
                 csv_writer.writerow([self.index, self.peptide, link])
+
             self.driver.close()
 
         else:
-            with open('submit.log', 'a') as log_csv:
+            with open(f'{path}/submit.log', 'a') as log_csv:
                 csv_writer = csv.writer(log_csv, delimiter=',')
-                csv_writer.writerow([f'{self.index}.B99990001.pdb not found',
+                csv_writer.writerow([f'pep{self.index}.B99990001.pdb not found',
                                      f'{datetime.today().strftime("%Y-%m-%d %H:%M")}'])
             print('\nLigand not found.\n')
 
