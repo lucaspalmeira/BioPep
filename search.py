@@ -6,9 +6,11 @@ from Bio import SeqIO
 from Alpha.Biopep import Peptide
 from Alpha.Modelling import Modelling
 from Alpha.Submit import Dock
+from output import output
 
 
-def execute(y, email):
+def execute(y, email, task):
+    output.generate(task)
     for i, sequence in enumerate(SeqIO.parse(y, 'fasta')):
         print(f'Reading sequence{i}: {sequence.seq}')
         if len(list(str(sequence.seq))) <= 30:
@@ -29,6 +31,9 @@ def execute(y, email):
     after receiving all the emails with the results, \
     run the notebook to perform the data scraping.')
 
+    output.clear()
+    output.finish()
+
 
 if __name__ == '__main__':
-    execute(str(sys.argv[1]), str(sys.argv[2]))
+    execute(str(sys.argv[1]), str(sys.argv[2]), str(sys.argv[3]))
