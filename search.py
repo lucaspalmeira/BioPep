@@ -7,6 +7,7 @@ from Alpha.Biopep import Peptide
 from Alpha.Modelling import Modelling
 from Alpha.Submit import Dock
 from output import output
+import dock_scraping as ds
 
 
 def execute(y, email, task):
@@ -27,12 +28,13 @@ def execute(y, email, task):
             continue
     print('Complete counterpart search.')
     print('Complete molecular modeling of peptides.')
-    print('The peptides were subjected to molecular docking, \
-    after receiving all the emails with the results, \
-    run the notebook to perform the data scraping.')
+
+    ds.start_scraping()
 
     output.clear()
     output.finish()
+
+    print('Complete molecular docking of peptides.')
 
 
 if __name__ == '__main__':
