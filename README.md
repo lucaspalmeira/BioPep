@@ -20,14 +20,9 @@ pip3 install biopython
 
 ### Create Data Base (PDB)
 ```
-cd pdb/
+bash make.sh -tf <filename>
 ```
-```
-tar -xvzf pdb_seqres.fasta.tar.gz
-```
-```
-python3 make.py pdb_seqres.fasta
-```
+Replace filename with path to database file, for example: `pdb/pdb_seqres.fasta.tar.gz`. Run `bash make.sh -h` to see help.
 
 ### Install Anaconda Python
 
@@ -107,10 +102,11 @@ Windows 10
 
 ## Run
 ```
-python3 search.py query.fasta email@email.com
+python3 search.py query.fasta email@email.com taskname
 ```
-
-Note: After receiving the results by email, run notebook to retrieve your data.
+`query.fasta`: file with peptides for submit <br>
+`email@email.com`: your email address <br>
+`taskname`: title to your task, for save in output folder
 
 ## Please, cite:
 > ### BioPep

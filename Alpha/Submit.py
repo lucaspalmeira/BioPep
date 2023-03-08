@@ -13,7 +13,9 @@ import os
 
 class Dock:
     def __init__(self, index, peptide, email):
-        self.driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        options.add_argument("--headless")
+        self.driver = webdriver.Chrome(options=options)
         self.peptide = peptide
         self.index = index
         self.email = email
