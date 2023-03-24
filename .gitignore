@@ -12,6 +12,7 @@
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
+**/__pycache__/**
 __pycache__/
 *.py[cod]
 *$py.class
@@ -31,11 +32,6 @@ venv.bak/
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,pycharm+iml,pycharm+all,python
 
 ### BioPep ###
-
-# Cache Folders
-Alpha/__pycache__/
-output/__pycache__/
-pdb/__pycache__/
 
 # PDB database
 !pdb/

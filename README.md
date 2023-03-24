@@ -28,10 +28,10 @@ Replace filename with path to database file, for example: `pdb/pdb_seqres.fasta.
 
 Linux Ubuntu or CentOS 7
 ```
-wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
+wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
 ```
 ```
-bash Anaconda3-2021.11-Linux-x86_64.sh
+bash Anaconda3-2022.10-Linux-x86_64.sh
 ```
 
 Windows 10

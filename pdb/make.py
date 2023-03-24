@@ -7,7 +7,7 @@ def createdb(file):
     makeblastdb = NcbimakeblastdbCommandline(
         input_file=file,
         dbtype="prot",
-        out=f'{os.getcwd() + "/pdb/pdb_seqres"}'
+        out=f'{os.getcwd()}/pdb/pdb_seqres'
     )
     makeblastdb()
     print('Database created successfully!')

@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 # Start a task, generating an output folder with current datetime and task name
-def generate(task: str) -> str:
+def generate(task: str):
     dt = datetime.today()
     directory = f'{dt.strftime("%Y.%m.%d-%H.%M.%S")}-{task}'
     path = f'{os.getcwd()}/output/{directory}'
@@ -20,7 +20,7 @@ def generate(task: str) -> str:
 
 
 # Get all tasks output paths
-def getall() -> [str]:
+def getall():
     outputs = []
     with open('output/outputs_history.log') as out_hist:
         lines = out_hist.readlines()
@@ -33,9 +33,9 @@ def getall() -> [str]:
 
 
 # Get the more recent task output path
-def get() -> str:
+def get():
     outputs = getall()
-    return outputs[len(outputs) - 1]
+    return outputs[-1]
 
 
 # Set the task finish time

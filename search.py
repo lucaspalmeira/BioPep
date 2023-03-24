@@ -15,13 +15,18 @@ def execute(y, email, task):
     for i, sequence in enumerate(SeqIO.parse(y, 'fasta')):
         print(f'Reading sequence{i}: {sequence.seq}')
         if len(list(str(sequence.seq))) <= 30:
+            # Step 1 - Search homologous
             search = Peptide(str(i), str(sequence.seq))
             search.createfasta()
             search.runblast()
+
+            # Step 2 - Modelling
             modeller = Modelling(str(i), str(sequence.seq), 30)
             modeller.run_modelling()
-            dock = Dock(str(i), str(sequence.seq), email)
-            dock.submit()
+
+            # Step 3 - Docking
+            # dock = Dock(str(i), str(sequence.seq), email)
+            # dock.submit()
 
         else:
             print('Sequence longer than 30 amino acids.\n')
@@ -29,12 +34,12 @@ def execute(y, email, task):
     print('Complete counterpart search.')
     print('Complete molecular modeling of peptides.')
 
-    ds.start_scraping()
+    # ds.start_scraping()
 
     output.clear()
     output.finish()
 
-    print('Complete molecular docking of peptides.')
+    # print('Complete molecular docking of peptides.')
 
 
 if __name__ == '__main__':
