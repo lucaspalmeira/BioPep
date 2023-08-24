@@ -34,10 +34,8 @@ venv.bak/
 ### BioPep ###
 
 # PDB database
-!pdb/
-pdb/*
-!pdb/make.py
-!pdb/*.tar.gz
+!database/
+database/*
 
 # Output Tasks and Logs (Search, Modelling and Docking results)
 !output/
