@@ -2,6 +2,7 @@
 
 > Pipeline for the search of homologues and molecular modeling for each peptide as well as the molecular docking between the peptides and the RBD receptor (PDB: 6LZG) of SARS-CoV-2.
 >> By Lucas Palmeira: CNPq Technological Initiation Scholarship | Data Scientist in Training
+>> 
 >> By William Sena: CNPq Technological Initiation Scholarship
 
 ## Licence
