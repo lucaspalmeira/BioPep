@@ -6,104 +6,45 @@
 ## Licence
 > GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 
-## Requisites
+## Installation
 
-### Install Biopython
-```
-pip3 install biopython
-```
-
-### Download Protein Data Bank (PDB)
-> Last updated: November 10, 2021 (183980 deposited crystallographic structures).
-> 
-> https://www.rcsb.org/downloads/fasta
-
-### Create Data Base (PDB)
-```
-bash make.sh -tf <filename>
-```
-Replace filename with path to database file, for example: `pdb/pdb_seqres.fasta.tar.gz`. Run `bash make.sh -h` to see help.
-
-### Install Anaconda Python
-
-Linux Ubuntu or CentOS 7
-```
-wget https://repo.anaconda.com/archive/Anaconda3-2022.10-Linux-x86_64.sh
-```
-```
-bash Anaconda3-2022.10-Linux-x86_64.sh
+Clone this repository:
+```bash
+git clone git@github.com/WilliamJSS/biopep
 ```
 
-Windows 10
-> [Anaconda3-2022.10-Windows-x86_64.exe](https://repo.anaconda.com/archive/Anaconda3-2022.10-Windows-x86_64.exe)
-> 
-> Visit the official website to see other versions: [Anaconda.com](https://www.anaconda.com/products/distribution#Downloads)
-
-### Install Pywget (Only Windows)
-```
-conda install -c anaconda pywget
+Navigate to project folder:
+```bash
+cd biopep
 ```
 
-### Install Modeller
-```
-conda config --add channels salilab
-```
-```
-conda install modeller
-```
-You will be prompted after installation to edit a file to add your Modeller license key.
-Alternatively, set the `KEY_MODELLER` environment variable to your license key before you run **conda install**.
-
-### Install Selenium
-```
-conda install -c conda-forge selenium
+Copy .env file and add the `Modeller KEY`:
+```bash
+cp .env.example .env
 ```
 
-### Install WebDriver
-
-Geckodriver (Firefox) on Linux
+Up containers:
+```bash
+docker compose up -d
 ```
-wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux32.tar.gz
-```
-```
-tar -xvzf geckodriver-v0.30.0-linux32.tar.gz
-```
-```
-chmod +x geckodriver
-```
-```
-sudo mv geckodriver /usr/local/bin/
-```
-
-ChromeDriver (Chrome) on Windows
-> [ChromeDriver - WebDriver for Chrome](https://chromedriver.chromium.org/downloads)
-> 
-> Download the corresponding version driver your Chrome and move the .exe archive to installing folder Anaconda.
-
-### Install Ncbi-Blast+ 
-
-Linux Ubuntu
-```
-sudo apt install ncbi-blast+
-```
-
-Linux CentOS 7
-```
-wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.12.0+-1.x86_64.rpm
-```
-```
-sudo yum install ncbi-blast-2.12.0+-1.x86_64.rpm --nogpgcheck
-```
-
-Windows 10
-> [Standalone BLAST Setup for Windows PC](https://www.ncbi.nlm.nih.gov/books/NBK52637/)
-> 
-> Follow the tutorial above for the setup NCBI-Blast on your Windows Machine.
 
 ## Run
+
+Access BioPep container shell:
+```bash
+docker exec -it biopep bash
 ```
-python3 search.py query.fasta email@email.com taskname
+
+Activate conda environment:
+```bash
+eval "$(conda shell.bash hook)" && conda activate biopep-env
 ```
+
+Execute BioPep:
+```bash
+python main.py query.fasta email@email.com taskname
+```
+
 `query.fasta`: file with peptides for submit <br>
 `email@email.com`: your email address <br>
 `taskname`: title to your task, for save in output folder
