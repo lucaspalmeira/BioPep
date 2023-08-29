@@ -10,7 +10,7 @@
 
 Clone this repository:
 ```bash
-git clone git@github.com:WilliamJSS/biopep.git
+git clone -b docker git@github.com:WilliamJSS/biopep.git
 ```
 
 Navigate to project folder:
