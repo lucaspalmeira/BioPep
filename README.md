@@ -2,6 +2,7 @@
 
 > Pipeline for the search of homologues and molecular modeling for each peptide as well as the molecular docking between the peptides and the RBD receptor (PDB: 6LZG) of SARS-CoV-2.
 >> By Lucas Palmeira: CNPq Technological Initiation Scholarship | Data Scientist in Training
+>> By William Sena: CNPq Technological Initiation Scholarship
 
 ## Licence
 > GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
@@ -51,7 +52,7 @@ python main.py query.fasta email@email.com taskname
 
 ## Please, cite:
 > ### BioPep
-> Lucas Sousa Palmeira. (2021). BioPep. Zenodo. https://doi.org/10.5281/zenodo.5781778
+> Lucas Sousa Palmeira, & William Sena. (2021). BioPep. Zenodo. https://doi.org/10.5281/zenodo.5781778
 
 > ### Hpepdock:
 > ZHOU, Pei; JIN, Bowen; LI, Hao; et al. HPEPDOCK: A web server for blind peptide-protein acoplamento based on a hierarchical algorithm. Nucleic Acids Research, v. 46, n. W1, p. W443–W450, 2018.
