@@ -1,13 +1,10 @@
-#! /usr/bin/python3.8
-# coding: utf-8
-
 import sys
 from Bio import SeqIO
 from Alpha.Biopep import Peptide
-# from Alpha.Modelling import Modelling
-# from Alpha.Submit import Dock
+from Alpha.Modelling import Modelling
+from Alpha.Submit import Dock
 from output import output
-# import dock_scraping as ds
+import dock_scraping as ds
 
 
 def execute(y, email, task):
@@ -21,8 +18,8 @@ def execute(y, email, task):
             search.runblast()
 
             # Step 2 - Modelling
-            # modeller = Modelling(str(i), str(sequence.seq), 30)
-            # modeller.run_modelling()
+            modeller = Modelling(str(i), str(sequence.seq), 30)
+            modeller.run_modelling()
 
             # Step 3 - Docking
             # dock = Dock(str(i), str(sequence.seq), email)
@@ -37,7 +34,7 @@ def execute(y, email, task):
 
     # ds.start_scraping()
 
-    # output.clear()
+    output.clear()
     output.finish()
 
     # print('Complete molecular docking of peptides.')

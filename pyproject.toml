@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "biopep"
+version = "0.1.0"
+description = "Search, molecular modeling and molecular docking of peptides."
+authors = ["lucaspalmeira <lspalmeira.bio@gmail.com>", "WilliamJSS <williamsena088@gmail.com>"]
+license = "GPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.9.17"
+biopython = "^1.81"
+pandas = "^2.0.3"
+wget = "^3.2"
+selenium = "^4.11.2"
+conda-lock = "^2.1.2"
+
+[tool.conda-lock]
+default-non-conda-source = "pip"
+platforms = ['linux-64']
+channels = ['conda-forge', 'salilab']
+
+[tool.conda-lock.dependencies]
+modeller = ">=10.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
