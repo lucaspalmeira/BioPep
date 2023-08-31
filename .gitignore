@@ -37,3 +37,6 @@ venv.bak/
 !output/
 output/*
 !output/output.py
+
+# PIABA files
+piaba*
