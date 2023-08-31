@@ -66,7 +66,7 @@ def start_scraping():
             os.rmdir(f'{dock_path}/{directory}')
             os.remove('top10_models.tar.gz')
 
-            print(f'Pep{item["Index"]} docking has completed. See top 10 models for it in:\n  {dock_path}\n')
+            print(f'\nPep{item["Index"]} docking has completed. See top 10 models for it in:\n  {dock_path}\n')
 
         driver.close()
 
