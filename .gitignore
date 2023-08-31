@@ -33,10 +33,6 @@ venv.bak/
 
 ### BioPep ###
 
-# PDB database
-!database/
-database/*
-
 # Output Tasks and Logs (Search, Modelling and Docking results)
 !output/
 output/*

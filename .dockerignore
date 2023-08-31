@@ -1,5 +1,3 @@
 !output/
 output/*
 !output/output.py
-
-database

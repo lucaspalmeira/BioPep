@@ -6,7 +6,7 @@ services:
     image: biopep
     container_name: biopep
     environment:
-      KEY_MODELLER: ${KEY_MODELLER}
+      KEY_MODELLER: ${MODELLER_KEY}
     volumes:
       - .:/home/biopep
     stdin_open: true

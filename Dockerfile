@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1 
 
 # install system packages
-RUN apt update && apt install -y ncbi-blast+ nano curl git wget unzip gnupg
+RUN apt-get update && apt-get install -y ncbi-blast+ nano curl git wget unzip gnupg
 RUN git config --global --add safe.directory /home/biopep
 
 # install miniconda
@@ -16,18 +16,14 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     && conda update conda \
     && conda config --set auto_activate_base false
 
-# adding trusting keys to apt for repositories
-RUN wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-
-# adding Google Chrome to the repositories
-RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
-
-# install package to download chrome
-RUN apt update && apt install -y google-chrome-stable
+# download the Chrome Browser
+RUN CHROME_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE) \
+    && wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}-1_amd64.deb \
+    && apt-get -y install ./google-chrome-stable_${CHROME_VERSION}-1_amd64.deb
 
 # download the Chrome Driver
-RUN CHROME_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
-    wget -O /tmp/chromedriver.zip \
+RUN CHROME_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE) \
+    && wget -O /tmp/chromedriver.zip \
     http://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip
 
 # unzip the Chrome Driver into /usr/local/bin directory
@@ -51,7 +47,6 @@ ADD . .
 RUN chmod -R 777 .
 
 # create environment
-ENV KEY_MODELLER=${KEY_MODELLER}
 RUN conda create --name biopep-env --file conda-linux-64.lock \
     && eval "$(conda shell.bash hook)" \
     && conda activate biopep-env \
