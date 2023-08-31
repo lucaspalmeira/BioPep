@@ -17,32 +17,21 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -
     && conda config --set auto_activate_base false
 
 # adding trusting keys to apt for repositories
-RUN wget -qO- https://dl.google.com/linux/linux_signing_key.pub \
-    | gpg --dearmour -o /usr/share/keyrings/chrome-keyring.gpg 
+RUN wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
 
 # adding Google Chrome to the repositories
-RUN echo "deb [arch=amd64 signed-by=/usr/share/keyrings/chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" \
-    > /etc/apt/sources.list.d/google.list
+RUN echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
 
 # install package to download chrome
 RUN apt update && apt install -y google-chrome-stable
 
-
-# # download the Chrome Driver (OPTION 1)
-# RUN CHROME_VERSION=$(google-chrome --product-version) && \
-#     wget -O /tmp/chromedriver.zip \
-#     http://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip
-# # unzip the Chrome Driver into /usr/local/bin directory
-# RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
-
-
-# download the Chrome Driver (OPTION 2)
-RUN CHROME_VERSION=$(google-chrome --product-version) && \
+# download the Chrome Driver
+RUN CHROME_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
     wget -O /tmp/chromedriver.zip \
-    https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip
-# unzip the Chrome Driver into /usr/local/bin directory
-RUN unzip /tmp/chromedriver.zip chromedriver-linux64/chromedriver -d /usr/local/bin/
+    http://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip
 
+# unzip the Chrome Driver into /usr/local/bin directory
+RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 # set display port as an environment variable
 ENV DISPLAY=:99
