@@ -5,40 +5,47 @@ from Alpha.Modelling import Modelling
 from Alpha.Submit import Dock
 from output import output
 import dock_scraping as ds
+import os
 
 
-def execute(y, email, task):
+# Constants
+CUT_OFF = 30
+
+
+def execute(query, task='task'):
     output.generate(task)
-    for i, sequence in enumerate(SeqIO.parse(y, 'fasta')):
+    for i, sequence in enumerate(SeqIO.parse(query, 'fasta')):
         print(f'Reading sequence{i}: {sequence.seq}')
-        if len(list(str(sequence.seq))) <= 30:
+        if len(list(str(sequence.seq))) <= CUT_OFF:
             # Step 1 - Search homologous
-            search = Peptide(str(i), str(sequence.seq))
+            search = Peptide(i, str(sequence.seq))
             search.createfasta()
             search.runblast()
 
             # Step 2 - Modelling
-            modeller = Modelling(str(i), str(sequence.seq), 30)
+            modeller = Modelling(i, str(sequence.seq), CUT_OFF)
             modeller.run_modelling()
 
             # Step 3 - Docking
-            # dock = Dock(str(i), str(sequence.seq), email)
-            # dock.submit()
+            dock = Dock(index=i,peptide= str(sequence.seq), receptor= f'{os.getcwd()}/input/receptor_6lzg.pdb', site= '455:B, 486:B, 493:B, 501:B, 505:B')
+            dock.submit()
 
         else:
-            print('Sequence longer than 30 amino acids.\n')
+            print(f'Sequence longer than {CUT_OFF} amino acids.\n')
             continue
         
     print('Complete counterpart search.')
     print('Complete molecular modeling of peptides.')
 
-    # ds.start_scraping()
+    # Step 4 - Get docking results
+    ds.start_scraping()
 
     output.clear()
     output.finish()
 
-    # print('Complete molecular docking of peptides.')
+    print('Complete molecular docking of peptides.')
 
 
 if __name__ == '__main__':
-    execute(str(sys.argv[1]), str(sys.argv[2]), str(sys.argv[3]))
+    [_, query, task] = sys.argv
+    execute(query, task)

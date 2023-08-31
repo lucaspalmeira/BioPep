@@ -1,4 +1,5 @@
-from selenium import webdriver
+from selenium.webdriver import Chrome
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 from output import output
@@ -24,9 +25,11 @@ def start_scraping():
     print(f'It\'s will try to do the docking scraping every {reloadtime} seconds.\n', flush=True)
 
     while len(items) > 0:
-        options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
-        driver = webdriver.Chrome(options=options)
+        options = Options()
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--headless')
+        driver = Chrome(options=options)
         for i, item in enumerate(items):
             driver.get(item['Link'])
             time.sleep(3)
@@ -40,28 +43,28 @@ def start_scraping():
             else:
                 item['Status'] = 'FINISHED'
 
+            # Docking Score (1st model)
             print('Collecting data...', item['Link'])
             element = driver.find_element(By.XPATH, '/html/body/center/table[3]/tbody/tr[2]/td[1]')
             item['Energy'] = element.text
-            # Docking Score (1st model)
 
+            # Create docking results folder
             dock_path = f'{out_path}/docking/pep{item["Index"]}'
             if not os.path.exists(dock_path):
                 os.makedirs(dock_path)
-            # Create docking results folder
 
+            # Download and extract files containing the 10 best positions of each peptide
             top10_models = f'{item["Link"]}top10_models.tar.gz'
             wget.download(top10_models)
             os.system(f'tar -xzf top10_models.tar.gz -C {dock_path}')
-            # Download and extract files containing the 10 best positions of each peptide
 
+            # Delete file and move models to pep folder
             [directory] = os.listdir(dock_path)
             topmodels = os.listdir(f'{dock_path}/{directory}')
             for model in topmodels:
                 os.rename(f'{dock_path}/{directory}/{model}', f'{dock_path}/{model}')
             os.rmdir(f'{dock_path}/{directory}')
             os.remove('top10_models.tar.gz')
-            # Delete file and move models to pep folder
 
             print(f'Pep{item["Index"]} docking has completed. See top 10 models for it in:\n  {dock_path}\n')
 

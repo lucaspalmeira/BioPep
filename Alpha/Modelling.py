@@ -34,7 +34,7 @@ class Modelling:
                         with open(f'{pep_path}/pep{self.index}.ali', 'a') as writing:
                             writing.write(f'>P1;pep{self.index}\n')
                             writing.write(f'sequence:pep{self.index}:::::::0.00: 0.00\n')
-                            writing.write(self.peptide + '*')
+                            writing.write(f'{self.peptide}*')
 
                         try:
                             link = f'https://files.rcsb.org/download/{code_pdb[0:4]}.pdb'
@@ -56,7 +56,7 @@ class Modelling:
                             pdb = f'{pep_path}/{code_pdb[0:4]}'
                             # file='1bdm'
                             mdl = Model(env, file=pdb, model_segment=(f'FIRST:{code_pdb[5]}', f'LAST:{code_pdb[5]}'))
-                            pdb_chain = code_pdb[0:4] + code_pdb[5]
+                            pdb_chain = f'{code_pdb[0:4]}{code_pdb[5]}'
                             # file='1bdmA'
                             aln.append_model(mdl, align_codes=pdb_chain, atom_files=f'{pep_path}/{code_pdb[0:4]}.pdb')
                             file_ali = f'{pep_path}/pep{self.index}.ali'
@@ -85,7 +85,7 @@ class Modelling:
                             # Move the modelling output files to output folder
                             output_models = [x for x in a.outputs if x['failure'] is None]
                             for om in output_models:
-                                os.rename(om['name'], pep_path + '/' + om['name'])
+                                os.rename(om['name'], f"{pep_path}/{om['name']}")
 
                             exts = ['D00000001', 'ini', 'rsr', 'sch', 'V99990001']
                             for ext in exts:

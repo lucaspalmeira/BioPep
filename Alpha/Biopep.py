@@ -15,7 +15,7 @@ class Peptide:
         pep_path = f'output/{output.get()}/modelling/pep{self.index}'
         os.makedirs(pep_path)
         with open(f'{pep_path}/pep{self.index}.fasta', 'a') as writing:
-            writing.write('>pep' + self.index + '\n')
+            writing.write(f'>pep{self.index}\n')
             writing.write(self.peptide)
 
     def runblast(self):

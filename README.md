@@ -44,11 +44,10 @@ eval "$(conda shell.bash hook)" && conda activate biopep-env
 
 Execute BioPep:
 ```bash
-python main.py query.fasta email@email.com taskname
+python main.py query.fasta taskname
 ```
 
 `query.fasta`: file with peptides for submit <br>
-`email@email.com`: your email address <br>
 `taskname`: title to your task, for save in output folder
 
 ## Please, cite:
