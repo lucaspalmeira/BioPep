@@ -23,6 +23,6 @@ class Peptide:
         command_blastp = NcbiblastpCommandline(task='blastp-short',
                                                query=f'{pep_path}/pep{self.index}.fasta',
                                                db="/blastdb/pdb_seqres",
-                                               outfmt='"10 qseqid sseqid evalue bitscore pident"',
+                                               outfmt='"10 qseqid sseqid evalue bitscore pident qseq sseq qcovs"',
                                                out=f'{pep_path}/pep{self.index}.csv')
         stdout, stderr = command_blastp()

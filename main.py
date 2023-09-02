@@ -26,7 +26,7 @@ def execute(query, task='task'):
             modeller = Modelling(i, str(sequence.seq), CUT_OFF)
             modeller.run_modelling()
 
-            # Step 3 - Docking
+            # # Step 3 - Docking
             dock = Dock(index=i,peptide= str(sequence.seq), receptor= f'{os.getcwd()}/input/receptor_6lzg.pdb', site= '455:B, 486:B, 493:B, 501:B, 505:B')
             dock.submit()
 
