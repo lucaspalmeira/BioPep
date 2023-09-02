@@ -6,14 +6,17 @@ from datetime import datetime
 # Start a task, generating an output folder with current datetime and task name
 def generate(task: str):
     dt = datetime.today()
+    log_file = f'{os.getcwd()}/output/outputs_history.log'
     directory = f'{dt.strftime("%Y.%m.%d-%H.%M.%S")}-{task}'
     path = f'{os.getcwd()}/output/{directory}'
     print(f'Generated output in: {path}')
     os.mkdir(path)
 
+    endline = '\n' if os.path.isfile(log_file) else ''
+
     # Write path in log file
-    with open(f'{os.getcwd()}/output/outputs_history.log', 'a') as out_hist:
-        line = f'{task}, started at = {dt.strftime("%Y-%m-%d %H:%M:%S")}, '
+    with open(log_file, 'a') as out_hist:
+        line = f'{endline}{task}, started at = {dt.strftime("%Y-%m-%d %H:%M:%S")}, finished at = '
         out_hist.write(line)
 
     return path
@@ -42,7 +45,7 @@ def get():
 def finish():
     dt = datetime.today()
     with open(f'{os.getcwd()}/output/outputs_history.log', 'a') as out_hist:
-        out_hist.write(f'finished at = {dt.strftime("%Y-%m-%d %H:%M:%S")}\n')
+        out_hist.write(dt.strftime("%Y-%m-%d %H:%M:%S"))
 
 
 # Delete unmodeled peptides folders
@@ -54,4 +57,3 @@ def clear():
             items = line.split(', ')
             if 'unmodeled' in line:
                 shutil.rmtree(f'{os.getcwd()}/output/{path}/modelling/{items[0]}')
-
