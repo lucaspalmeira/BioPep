@@ -1,12 +1,16 @@
 # BioPep
 
 > Pipeline for the search of homologues and molecular modeling for each peptide as well as the molecular docking between the peptides and the RBD receptor (PDB: 6LZG) of SARS-CoV-2.
->> By Lucas Palmeira: CNPq Technological Initiation Scholarship | Data Scientist in Training
->> 
->> By William Sena: CNPq Technological Initiation Scholarship
+>> By Lucas Palmeira: CNPq Technological Initiation Scholarship | Data Scientist in Training <br>
+>> By William Sena: CNPq Technological Initiation Scholarship | Python Developer
 
 ## Licence
 > GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
+
+## Requisites
+
+- A [Modeller](https://salilab.org/modeller/) License Key;
+- System Operational with [Docker](https://www.docker.com) installed;
 
 ## Installation
 
