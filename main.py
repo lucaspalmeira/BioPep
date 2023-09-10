@@ -26,7 +26,7 @@ def execute(query, task='task'):
             modeller = Modelling(i, str(sequence.seq), CUT_OFF)
             modeller.run_modelling()
 
-            # # Step 3 - Docking
+            # Step 3 - Docking
             dock = Dock(index=i,peptide= str(sequence.seq), receptor= f'{os.getcwd()}/input/receptor_6lzg.pdb', site= '455:B, 486:B, 493:B, 501:B, 505:B')
             dock.submit()
 
@@ -37,15 +37,22 @@ def execute(query, task='task'):
     print('Complete counterpart search.')
     print('Complete molecular modeling of peptides.')
 
+    # Delete unmodeled peptides folders
+    output.clear()
+
+    # Get blast results
+    print('Saving blast results...')
+    output.blast()
+
     # Step 4 - Get docking results
     ds.start_scraping()
-
-    output.clear()
-    output.finish()
-
+    
     print('Complete molecular docking of peptides.')
+
+    output.finish()
 
 
 if __name__ == '__main__':
-    [_, query, task] = sys.argv
-    execute(query, task)
+    # [_, query, task] = sys.argv
+    # execute(query, task)
+    output.blast()

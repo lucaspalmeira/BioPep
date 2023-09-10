@@ -1,6 +1,7 @@
 import os
 import shutil
 from datetime import datetime
+import pandas as pd
 
 
 # Start a task, generating an output folder with current datetime and task name
@@ -48,12 +49,51 @@ def finish():
         out_hist.write(dt.strftime("%Y-%m-%d %H:%M:%S"))
 
 
-# Delete unmodeled peptides folders
-def clear():
-    path = get()
-    with open(f'{os.getcwd()}/output/{path}/out.log') as submit_log:
+# Get peptides ids and sequences
+def get_peptides(modelled:bool):
+    peptides = {}
+    with open(f'{os.getcwd()}/output/{get()}/out.log') as submit_log:
         lines = submit_log.readlines()
         for line in lines:
             items = line.split(', ')
-            if 'unmodeled' in line:
-                shutil.rmtree(f'{os.getcwd()}/output/{path}/modelling/{items[0]}')
+            if modelled and 'unmodeled' not in line:
+                peptides[items[0]] = items[1]
+            elif 'unmodeled' in line:
+                peptides[items[0]] = items[1]
+
+    return peptides
+
+
+# Delete unmodeled peptides folders
+def clear():
+    peptides = get_peptides(modelled=False)
+    for pep in list(peptides.keys()):
+        pep_folder = f'{os.getcwd()}/output/{get()}/modelling/{pep}'
+        if os.path.exists(pep_folder):
+            print(f'Excluding unmodeled peptide folder...\n  {pep_folder}\n')
+            shutil.rmtree(pep_folder)
+
+
+# Get blast results
+def blast():
+    output_task = f'{os.getcwd()}/output/{get()}'
+    modelled_peptides = os.listdir(f'{output_task}/modelling')
+    peptides = get_peptides(modelled=True)
+
+    pep_dfs = []
+    for pep in modelled_peptides:
+        pep_dfs.append(pd.read_csv(f'{output_task}/modelling/{pep}/{pep}.csv', header=None))
+
+    df = pd.concat(pep_dfs, ignore_index=True)
+    df.columns = ['qseqid', 'sseqid', 'evalue', 'bitscore', 'pident', 'qseq', 'sseq', 'qcovs']
+
+    sequences = []
+    for i in range(len(df)):
+        pep_id = df.iloc[i,0]
+        sequences.append(peptides[pep_id])
+
+    df = pd.concat([df, pd.Series(sequences, name='sequence')], axis=1)
+
+    df = df.reindex(['qseqid', 'sseqid', 'sequence', 'evalue', 'bitscore', 'pident', 'qcovs', 'qseq', 'sseq'], axis=1)
+
+    df.to_csv(f'{output_task}/blast.csv', index=False)
