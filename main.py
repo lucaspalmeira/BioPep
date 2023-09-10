@@ -43,16 +43,16 @@ def execute(query, task='task'):
     # Get blast results
     print('Saving blast results...')
     output.blast()
+    output.zip_pdbs()
 
     # Step 4 - Get docking results
     ds.start_scraping()
-    
+
     print('Complete molecular docking of peptides.')
 
     output.finish()
 
 
 if __name__ == '__main__':
-    # [_, query, task] = sys.argv
-    # execute(query, task)
-    output.blast()
+    [_, query, task] = sys.argv
+    execute(query, task)

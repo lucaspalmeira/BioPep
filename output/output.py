@@ -50,7 +50,7 @@ def finish():
 
 
 # Get peptides ids and sequences
-def get_peptides(modelled:bool):
+def get_peptides(modelled=True):
     peptides = {}
     with open(f'{os.getcwd()}/output/{get()}/out.log') as submit_log:
         lines = submit_log.readlines()
@@ -58,7 +58,7 @@ def get_peptides(modelled:bool):
             items = line.split(', ')
             if modelled and 'unmodeled' not in line:
                 peptides[items[0]] = items[1]
-            elif 'unmodeled' in line:
+            elif not modelled and 'unmodeled' in line:
                 peptides[items[0]] = items[1]
 
     return peptides
@@ -78,7 +78,7 @@ def clear():
 def blast():
     output_task = f'{os.getcwd()}/output/{get()}'
     modelled_peptides = os.listdir(f'{output_task}/modelling')
-    peptides = get_peptides(modelled=True)
+    peptides = get_peptides()
 
     pep_dfs = []
     for pep in modelled_peptides:
@@ -97,3 +97,18 @@ def blast():
     df = df.reindex(['qseqid', 'sseqid', 'sequence', 'evalue', 'bitscore', 'pident', 'qcovs', 'qseq', 'sseq'], axis=1)
 
     df.to_csv(f'{output_task}/blast.csv', index=False)
+
+
+# Zip modeled pdb files
+def zip_pdbs():
+    output_task = f'./output/{get()}'
+    peptides = get_peptides()
+
+    os.makedirs(f'{output_task}/structures', exist_ok=True)
+
+    for pep in list(peptides.keys()):
+        pdb_file = f'{output_task}/modelling/{pep}/{pep}.B99990001.pdb'
+        os.system(f'cp {pdb_file} {output_task}/structures/{pep}.pdb')
+
+    os.system(f'tar -czvf {output_task}/structures.tar.gz {output_task}/structures')
+    shutil.rmtree(f'{output_task}/structures')
