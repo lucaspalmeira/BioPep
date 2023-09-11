@@ -104,11 +104,11 @@ def zip_pdbs():
     output_task = f'./output/{get()}'
     peptides = get_peptides()
 
-    os.makedirs(f'{output_task}/structures', exist_ok=True)
+    os.makedirs('structures', exist_ok=True)
 
     for pep in list(peptides.keys()):
         pdb_file = f'{output_task}/modelling/{pep}/{pep}.B99990001.pdb'
-        os.system(f'cp {pdb_file} {output_task}/structures/{pep}.pdb')
+        os.system(f'cp {pdb_file} structures/{pep}.pdb')
 
-    os.system(f'tar -czvf {output_task}/structures.tar.gz {output_task}/structures')
-    shutil.rmtree(f'{output_task}/structures')
+    os.system(f'tar -czvf {output_task}/structures.tar.gz structures')
+    shutil.rmtree('structures')
