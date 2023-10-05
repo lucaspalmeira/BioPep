@@ -1,85 +1,58 @@
 # BioPep
 
 > Pipeline for the search of homologues and molecular modeling for each peptide as well as the molecular docking between the peptides and the RBD receptor (PDB: 6LZG) of SARS-CoV-2.
->> By Lucas Palmeira and William Sena: CNPq Technological Initiation Scholarship | Data Scientist in Training
+>> By Lucas Palmeira: CNPq Technological Initiation Scholarship | Data Scientist in Training <br>
+>> By William Sena: CNPq Technological Initiation Scholarship | Python Developer
 
 ## Licence
 > GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 
 ## Requisites
 
-### Install Biopython
-```
-pip3 install biopython
+- A [Modeller](https://salilab.org/modeller/) License Key;
+- System Operational with [Docker](https://www.docker.com) installed;
+
+## Installation
+
+Clone this repository:
+```bash
+git clone -b docker git@github.com:WilliamJSS/biopep.git
 ```
 
-### Download Protein Data Bank (PDB)
-> Last updated: November 10, 2021 (183980 deposited crystallographic structures).
-> 
-> https://www.rcsb.org/downloads/fasta
-
-### Create Data Base (PDB)
-```
-cd pdb/
-```
-```
-tar -xvzf pdb_seqres.fasta.tar.gz
-```
-```
-python3 make.py pdb_seqres.fasta
+Navigate to project folder:
+```bash
+cd biopep
 ```
 
-### Install Anaconda Python
-```
-wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh
-```
-```
-bash Anaconda3-2021.11-Linux-x86_64.sh
+Copy .env file and add the `Modeller KEY`:
+```bash
+cp .env.example .env
 ```
 
-### Install Modeller 10.1
-```
-conda install modeller
-```
-You will be prompted after installation to edit a file to add your Modeller license key.
-
-### Install Geckodriver
-Linux Ubuntu or CentOS 7
-```
-wget https://github.com/mozilla/geckodriver/releases/download/v0.30.0/geckodriver-v0.30.0-linux32.tar.gz
-```
-```
-tar -xvzf geckodriver-v0.30.0-linux32.tar.gz
-```
-```
-chmod +x geckodriver
-```
-```
-sudo mv geckodriver /usr/local/bin/
-```
-
-### Install Ncbi-Blast+ 
-
-Linux Ubuntu
-```
-sudo apt install ncbi-blast+
-```
-
-Linux CentOS 7
-
-```
-wget https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-2.12.0+-1.x86_64.rpm
-```
-```
-sudo yum install ncbi-blast-2.12.0+-1.x86_64.rpm --nogpgcheck
+Up containers:
+```bash
+docker compose up -d
 ```
 
 ## Run
-```
-python3 search.py query.fasta email@email.com
+
+Access BioPep container shell:
+```bash
+docker exec -it biopep bash
 ```
 
-Note: After receiving the results by email, run notebook to retrieve your data.
+Activate conda environment:
+```bash
+eval "$(conda shell.bash hook)" && conda activate biopep-env
+```
+
+Execute BioPep:
+```bash
+python main.py query.fasta taskname
+```
+
+`query.fasta`: file with peptides for submit <br>
+`taskname`: title to your task, for save in output folder
 
 ## Please, cite:
 > ### BioPep

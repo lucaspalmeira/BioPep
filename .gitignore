@@ -1,0 +1,42 @@
+# Created by https://www.toptal.com/developers/gitignore/api/pycharm,pycharm+iml,pycharm+all,python
+# Edit at https://www.toptal.com/developers/gitignore?templates=pycharm,pycharm+iml,pycharm+all,python
+
+### PyCharm+all Patch ###
+# Ignore everything but code style settings and run configurations
+# that are supposed to be shared within teams.
+
+.idea/*
+
+!.idea/codeStyles
+!.idea/runConfigurations
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+**/__pycache__/**
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# End of https://www.toptal.com/developers/gitignore/api/pycharm,pycharm+iml,pycharm+all,python
+
+### BioPep ###
+
+# Output Tasks and Logs (Search, Modelling and Docking results)
+!output/
+output/*
+!output/output.py
+
+# PIABA files
+piaba*

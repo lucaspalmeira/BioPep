@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  python:
+    build: .
+    image: biopep
+    container_name: biopep
+    environment:
+      KEY_MODELLER: ${MODELLER_KEY}
+    volumes:
+      - .:/home/biopep
+    stdin_open: true
+    tty: true

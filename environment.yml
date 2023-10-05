@@ -1,0 +1,13 @@
+name: biopep-env
+channels:
+  - conda-forge
+  - salilab
+dependencies:
+  - conda-lock
+  - mamba
+  - pip
+  - poetry=1
+  - python=3.9.17
+  - salilab::modeller=10.4
+platforms:
+  - linux-64
